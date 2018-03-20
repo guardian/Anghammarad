@@ -2,8 +2,22 @@ package com.gu.anghammarad
 
 import scala.util.Try
 
+object Anghammarad {
+  def run(rawNotification: RawNotification): Try[Unit] = {
+    // parse input into Notification
+    val notification: Notification = ???
+    // resolve targets
+    val contacts: List[Contact] = ???
+    // DECIDE!!!
+    val filteredContacts: List[Contact] = ???
+    // send
+    filteredContacts.map { contact =>
+      val message = channelMessage(contact, notification)
+      send(contact, message)
+    }
+    ???
+  }
 
-object Logic {
   def resolveContact(target: Target, config: List[Mapping]): List[Contact] = {
     ???
   }
