@@ -1,5 +1,7 @@
 package com.gu.anghammarad
 
+import com.gu.anghammarad.models.RawNotification
+
 
 class DevMain {
   def main(args: Array[String]): Unit = {

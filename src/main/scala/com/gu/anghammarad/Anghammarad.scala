@@ -1,5 +1,7 @@
 package com.gu.anghammarad
 
+import com.gu.anghammarad.models._
+
 import scala.util.Try
 
 object Anghammarad {
@@ -18,7 +20,7 @@ object Anghammarad {
     ???
   }
 
-  def resolveContact(target: Target, config: List[Mapping]): List[Contact] = {
+  def resolveContact(target: List[Target], config: Mapping): List[Contact] = {
     ???
   }
 
