@@ -16,7 +16,7 @@ case class HangoutsChat(webhook: String) extends Contact
 
 
 case class Mapping(
-  mappings: List[(Target, Contact)]
+  mappings: List[(List[Target], List[Contact])]
 )
 
 case class Message(
@@ -30,27 +30,4 @@ case class Notification(
   target: List[Target],
   subject: String,
   message: Node
-)
-
-
-case class RawNotification(
-  sourceSystem: String,
-  target: String,
-  subject: String,
-  message: String
-)
-case class RawTarget(
-  key: String,
-  value: String
-)
-case class RawContact(
-  channel: String,
-  identifier: String
-)
-case class RawMapping(
-  target: List[RawTarget],
-  contacts: List[RawContact]
-)
-case class RawConfig(
-  mappings: List[(RawTarget, RawContact)]
 )

@@ -11,7 +11,7 @@ import scala.io.Source
 class AnghammaradTest extends FreeSpec with Matchers {
   "resolveContact" - {
     val configJson = Source.fromResource("contacts.json").mkString
-    val testMapping = parseMapping(configJson).flatMap(parseRawMapping).get
+    val testMapping = parseMapping(configJson).get
 
     "resolves app and stack to matching contacts" in {
       resolveContact(List(Stack("stack1"), App("app")), testMapping) shouldEqual List(
@@ -26,5 +26,9 @@ class AnghammaradTest extends FreeSpec with Matchers {
         HangoutsChat("stack.channel")
       )
     }
+  }
+
+  "TEST!!!" - {
+    parse("""{"foo": 1, "bar": 2}""").cursor.downField("foo").as[Int]
   }
 }
