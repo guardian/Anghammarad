@@ -16,6 +16,9 @@ Parameters:
     - PROD
     - CODE
     - DEV
+  AllowedAWSAccountIDs:
+    Description: AWS Accounts that are allowed to publish to this topic by default
+    Type: List<String>
 
 Mappings:
   Constants:
@@ -25,7 +28,6 @@ Mappings:
       Value: anghammarad
 
 Resources:
-
   ProcessorFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -33,14 +35,17 @@ Resources:
       Description: !Sub Process Anghammarad ${Stage} notifications
       Policies:
       - Statement:
-          - Effect: Allow
-            Action:
-            - ses:SendEmail
-            Resource: "*"
+        - Effect: Allow
+          Action:
+          - ses:SendEmail
+          Resource: "*"
       Handler: com.gu.anghammarad.Main::handleRequest
       Runtime: java8
       MemorySize: 512
       Timeout: 30
+      Environment:
+        Variables:
+          Stage: !Ref Stage
       CodeUri:
         Bucket: !Ref ArtifactBucket
         Key: !Ref ArtifactLocation
@@ -58,6 +63,19 @@ Resources:
     Type: AWS::SNS::Topic
     Properties:
       DisplayName: !Sub Anghammarad ${Stage} notification topic
+
+  NotificationTopicPolicy:
+    Type: "AWS::SNS::TopicPolicy"
+    Properties:
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action:
+          - sns:Publish
+          Principal:
+            AWS: !Ref AllowedAWSAccountIDs
+      Topics:
+      - !Ref NotificationTopic
 
 Outputs:
   TopicName:
