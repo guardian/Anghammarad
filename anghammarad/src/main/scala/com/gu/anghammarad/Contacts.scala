@@ -22,6 +22,8 @@ object Contacts {
     val targets = normaliseStages(rawTargets)
     val mappings = rawMappings.map(mapping => mapping.copy(targets = normaliseStages(mapping.targets)))
 
+    println(s"TEMPORARY LOGGING $mappings")
+
     for {
       exactMatches <- findExactMatches(targets, mappings)
       underSpecifiedMatches = findUnderSpecifiedMatches(targets, mappings)
